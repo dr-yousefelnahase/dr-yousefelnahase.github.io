@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>د. يوسف النحاس | السجل الطبي الحجري</title>
+    
+    <!-- 1. استدعاء الخطوط الكلاسيكية والحديثة -->
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <!-- مكتبة الأيقونات -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* =========================================
+           1. المتغيرات اللونية (الأزرق المصري والذهب)
+           ========================================= */
+        :root {
+            --egyptian-blue: #0B1D51; 
+            --egyptian-blue-dark: #061133; 
+            --pharaoh-gold: #D4AF37; 
+            --antique-gold: #9E8224; 
+            --papyrus: #F4EED8; 
+            --stone-shadow: rgba(0, 0, 0, 0.7);
+            --transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        /* =========================================
+           2. مؤشر الماوس المخصص (مفتاح الحياة)
+           ========================================= */
+        * {
+            margin: 0; padding: 0; box-sizing: border-box;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24"><defs><filter id="glow"><feDropShadow dx="0" dy="0" stdDeviation="2" flood-color="%239E8224"/></filter></defs><path fill="%23D4AF37" filter="url(%23glow)" stroke="%230B1D51" stroke-width="1" d="M12,2 C10.34,2 9,3.34 9,5 C9,6.5 10.08,7.76 11.5,7.97 L11.5,11 L9,11 L9,13 L11.5,13 L11.5,21 L12.5,21 L12.5,13 L15,13 L15,11 L12.5,11 L12.5,7.97 C13.92,7.76 15,6.5 15,5 C15,3.34 13.66,2 12,2 Z M12,4 C12.55,4 13,4.45 13,5 C13,5.55 12.55,6 12,6 C11.45,6 11,5.55 11,5 C11,4.45 11.45,4 12,4 Z"/></svg>'), auto !important;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: var(--egyptian-blue-dark); 
+            color: var(--papyrus);
+            overflow-x: hidden;
+            /* تم إزالة المسافة العلوية لعدم وجود إطار علوي */
+            padding: 0 35px 35px 35px; 
+        }
+
+        h1, h2, h3 { font-family: 'Amiri', serif; font-weight: 700; }
+
+        /* =========================================
+           3. إطار النقوش (بدون الحد العلوي)
+           ========================================= */
+        .engraved-frame {
+            position: fixed;
+            background-color: var(--pharaoh-gold);
+            color: var(--egyptian-blue-dark);
+            z-index: 10000; pointer-events: none;
+            display: flex; justify-content: space-around; align-items: center;
+            font-size: 1.1rem; font-family: 'Amiri', serif; font-weight: bold;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.5), 0 0 15px rgba(0,0,0,0.8);
+            user-select: none;
+            letter-spacing: 2px;
+        }
+        
+        .frame-bottom { bottom: 0; left: 0; width: 100%; height: 35px; border-top: 2px solid var(--antique-gold); }
+        /* استخدام writing-mode للنص العمودي */
+        .frame-right { top: 0; right: 0; width: 35px; height: 100%; writing-mode: vertical-rl; border-left: 2px solid var(--antique-gold); padding: 20px 0;}
+        .frame-left { top: 0; left: 0; width: 35px; height: 100%; writing-mode: vertical-rl; border-right: 2px solid var(--antique-gold); padding: 20px 0;}
+
+        /* =========================================
+           4. الكتلة الحجرية الرئيسية
+           ========================================= */
+        .stone-block {
+            width: 100%; max-width: 1300px; 
+            /* مسافة علوية لتنفس الموقع بعد إزالة الإطار العلوي */
+            margin: 40px auto 0 auto; 
+            background-color: var(--egyptian-blue);
+            /* تأثير ملمس الحجر */
+            background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noiseFilter)" opacity="0.06"/></svg>');
+            border: 3px solid var(--antique-gold);
+            border-radius: 8px;
+            box-shadow: inset 0 0 60px var(--egyptian-blue-dark), 0 20px 40px var(--stone-shadow);
+            position: relative;
+        }
+
+        .content-wrapper { padding: 40px 50px; }
+
+        /* =========================================
+           5. شريط التنقل واللوجو
+           ========================================= */
+        header {
+            position: sticky; top: 0; z-index: 1000;
+            background-color: var(--egyptian-blue);
+            background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noiseFilter)" opacity="0.06"/></svg>');
+            border-bottom: 3px solid var(--antique-gold);
+            padding: 20px 0; display: flex; justify-content: space-between; align-items: center;
+            margin: -40px -50px 40px -50px; padding-right: 50px; padding-left: 50px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+        }
+
+        .dynamic-logo { position: relative; width: 240px; height: 40px; display: flex; align-items: center; }
+        .dynamic-logo span {
+            position: absolute; right: 0; font-family: 'Amiri', serif; font-size: 1.8rem; font-weight: bold;
+            color: var(--pharaoh-gold); text-shadow: 2px 2px 4px var(--stone-shadow);
+            opacity: 0; white-space: nowrap; animation: smoothFade 12s infinite;
+        }
+        .dynamic-logo .lang-ar { animation-delay: 0s; }
+        .dynamic-logo .lang-en { font-family: 'Tajawal', sans-serif; font-size: 1.6rem; animation-delay: 4s; }
+        .dynamic-logo .lang-hiero { font-size: 1.9rem; animation-delay: 8s; letter-spacing: 3px; }
+
+        @keyframes smoothFade {
+            0%, 25% { opacity: 1; filter: blur(0); transform: translateY(0); }
+            30%, 95% { opacity: 0; filter: blur(4px); transform: translateY(-5px); }
+            100% { opacity: 1; filter: blur(0); transform: translateY(0); }
+        }
+
+        nav ul { display: flex; gap: 25px; list-style: none; align-items: center; }
+        nav a { color: var(--papyrus); text-decoration: none; font-size: 1.1rem; font-weight: bold; position: relative; padding: 5px 0; transition: var(--transition); }
+        nav a::after { content: ''; position: absolute; bottom: -5px; right: 0; width: 0; height: 2px; background: var(--pharaoh-gold); transition: width 0.4s; }
+        nav a:hover::after, nav a.active::after { width: 100%; }
+        nav a:hover, nav a.active { color: var(--pharaoh-gold); }
+
+        /* =========================================
+           6. العناوين والنصوص المحفورة
+           ========================================= */
+        .section { padding: 60px 0; min-height: 80vh; display: flex; flex-direction: column; justify-content: center; }
+        
+        .title-container { text-align: center; margin-bottom: 60px; position: relative; }
+        .section-title { 
+            font-size: 2.6rem; color: var(--pharaoh-gold); display: inline-block; position: relative; z-index: 2; 
+            padding: 0 40px; text-shadow: 2px 2px 5px var(--stone-shadow);
+        }
+        .section-title::before { content: '𓆸'; position: absolute; right: 0; color: var(--antique-gold); font-size: 2.2rem; top: 5px;}
+        .section-title::after { content: '𓂀'; position: absolute; left: 0; color: var(--antique-gold); font-size: 2.2rem; top: 0;}
+
+        /* =========================================
+           7. قسم الترحيب الحجري (Hero)
+           ========================================= */
+        .hero { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+        .hero-text h1 { font-size: clamp(2.2rem, 4vw, 3.8rem); margin-bottom: 20px; line-height: 1.3; text-shadow: 2px 2px 4px var(--stone-shadow); }
+        .hero-text h1 span { color: var(--pharaoh-gold); }
+        .hero-text h2 { font-size: 1.6rem; color: var(--papyrus); margin-bottom: 25px; border-right: 4px solid var(--pharaoh-gold); padding-right: 15px; }
+        .hero-text p { font-size: 1.15rem; line-height: 2; opacity: 0.9; }
+
+        .hero-img-box { position: relative; display: flex; justify-content: center; align-items: center; }
+        .hero-img-box::before {
+            content: ''; position: absolute; width: 340px; height: 340px;
+            border: 4px solid var(--antique-gold); border-radius: 15px; 
+            transform: rotate(45deg); transition: var(--transition);
+        }
+
+        .hero-img {
+            width: 320px; height: 320px; object-fit: cover; border-radius: 10px;
+            border: 4px solid var(--pharaoh-gold); box-shadow: 0 10px 30px var(--stone-shadow); z-index: 2; transition: var(--transition);
+        }
+        .hero-img:hover { transform: scale(1.05); }
+        .hero-img-box:hover::before { transform: rotate(90deg); }
+
+        /* =========================================
+           8. البطاقات الحجرية للأقسام
+           ========================================= */
+        .tomb-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+
+        .stone-card {
+            background-color: var(--egyptian-blue-dark); border: 2px solid var(--antique-gold);
+            border-radius: 8px; padding: 35px; transition: var(--transition);
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.8), 0 10px 20px var(--stone-shadow);
+            position: relative; overflow: hidden;
+        }
+        .stone-card:hover { transform: translateY(-5px); border-color: var(--pharaoh-gold); box-shadow: inset 0 0 10px rgba(0,0,0,0.5), 0 15px 30px var(--stone-shadow); }
+        .stone-card i { font-size: 2.8rem; color: var(--pharaoh-gold); margin-bottom: 15px; display: block; text-shadow: 2px 2px 4px #000; }
+        .stone-card h3 { font-size: 1.5rem; margin-bottom: 10px; color: var(--pharaoh-gold); }
+        .stone-card p { font-size: 1.1rem; line-height: 1.8; opacity: 0.9; }
+
+        .future-engraving {
+            text-align: center; padding: 45px 20px; background-color: transparent; 
+            border: 2px dashed var(--antique-gold); border-radius: 8px; transition: var(--transition);
+        }
+        .future-engraving:hover { border-color: var(--pharaoh-gold); background-color: rgba(212, 175, 55, 0.05); }
+        .future-engraving i { font-size: 3.2rem; color: var(--antique-gold); opacity: 0.5; margin-bottom: 15px; }
+        .future-engraving h3 { color: var(--papyrus); margin-bottom: 10px; }
+
+        /* =========================================
+           9. قسم التواصل 
+           ========================================= */
+        .contact-container { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+        .gold-btn {
+            display: flex; align-items: center; gap: 10px; padding: 15px 35px; border-radius: 5px;
+            background-color: var(--egyptian-blue-dark); border: 2px solid var(--pharaoh-gold);
+            color: var(--pharaoh-gold); text-decoration: none; font-size: 1.15rem; font-weight: bold; transition: var(--transition);
+            box-shadow: 0 5px 15px var(--stone-shadow);
+        }
+        .gold-btn:hover { background-color: var(--pharaoh-gold); color: var(--egyptian-blue-dark); transform: translateY(-5px); }
+
+        /* حركات الظهور للبطاقات */
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 1s cubic-bezier(0.25, 1, 0.5, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* التوافق مع شاشات الموبايل */
+        @media (max-width: 768px) {
+            body { padding: 0 10px 30px 10px; }
+            .frame-left, .frame-right { width: 25px; font-size: 0.9rem; }
+            .frame-bottom { height: 25px; font-size: 1rem; }
+            .content-wrapper { padding: 20px; }
+            .hero { grid-template-columns: 1fr; text-align: center; }
+            nav ul { display: none; }
+            header { margin: -20px -20px 30px -20px; padding: 15px; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. إطارات النقوش المتصلة مع معلومات طبية وتاريخية حقيقية -->
+    <!-- إزالة الإطار العلوي (frame-top) كما طلبت -->
+    
+    <div class="engraved-frame frame-bottom">𓆸 𓋹 𓂀 𓄤 𓍹 د. يوسف 𓍺 𓄤 𓂀 𓋹 𓆸 𓄤 𓍹 د. يوسف 𓍺 𓄤 𓂀 𓋹 𓆸</div>
+    
+    <!-- الحد الأيمن بمعلومات تاريخية عن الطب -->
+    <div class="engraved-frame frame-right">𓆸 بردية إدوين سميث أقدم وثيقة جراحية في التاريخ 𓂀 إمحوتب أبو الطب 𓋹</div>
+    
+    <!-- الحد الأيسر بمعلومات تاريخية عن الطب -->
+    <div class="engraved-frame frame-left">𓋹 قدماء المصريين أول من تخصصوا في فروع الطب 𓂀 الكاهن الطبيب 𓆸</div>
+
+    <!-- 2. الكتلة الحجرية الرئيسية للموقع -->
+    <div class="stone-block">
+        <div class="content-wrapper">
+            
+            <!-- شريط التنقل واللوجو -->
+            <header>
+                <div class="dynamic-logo">
+                    <span class="lang-ar">د. يوسف النحاس</span>
+                    <span class="lang-en">Dr. Yousef</span>
+                    <span class="lang-hiero">𓂧𓎡𓏏𓅱𓂋 𓇋𓅱𓋴𓆑</span>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#hero" class="active">الرئيسية</a></li>
+                        <li><a href="#education">سجل الحكمة</a></li>
+                        <li><a href="#cv-cert">الشهادات والسيرة</a></li>
+                        <li><a href="#future">العيادة</a></li>
+                        <li><a href="#contact">التواصل</a></li>
+                    </ul>
+                </nav>
+            </header>
+
+            <main>
+                <!-- قسم الترحيب -->
+                <section id="hero" class="section hero">
+                    <div class="hero-text reveal">
+                        <h1>اللوح الطبي المدون لـ<br><span>د. يوسف النحاس</span></h1>
+                        <h2>طبيب قيد التدريب | جامعة الأزهر</h2>
+                        <p>بإلهام من التصميم الفرعوني الأصيل، أُدون مسيرتي الأكاديمية على هذا اللوح الحجري. أكرس وقتي لفهم العلوم الطبية الأساسية، ودمج الفسيولوجيا وعلم الأمراض بالبحث العلمي الحديث لتقديم رعاية صحية راسخة.</p>
+                    </div>
+                    <div class="hero-img-box reveal">
+                        <img src="yousef.jpg" alt="د. يوسف النحاس" class="hero-img">
+                    </div>
+                </section>
+
+                <!-- قسم التعليم -->
+                <section id="education" class="section">
+                    <div class="title-container reveal">
+                        <h2 class="section-title">سجل الحكمة والعلوم</h2>
+                    </div>
+                    <div class="tomb-grid">
+                        <div class="stone-card reveal">
+                            <i class="fas fa-university"></i>
+                            <h3>جامعة الأزهر</h3>
+                            <p>طالب بالسنة الثالثة في كلية الطب البشري. دراسة مكثفة للعلوم الطبية الأساسية المؤهلة للعمل السريري.</p>
+                        </div>
+                        <div class="stone-card reveal">
+                            <i class="fas fa-heartbeat"></i>
+                            <h3>أمراض القلب (Cardiology)</h3>
+                            <p>اهتمام بالغ بدراسة فسيولوجيا القلب والأوعية الدموية، والتخطيط الكهربائي (ECG).</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- قسم السيرة والشهادات -->
+                <section id="cv-cert" class="section">
+                    <div class="title-container reveal">
+                        <h2 class="section-title">البرديات والشهادات</h2>
+                    </div>
+                    <div class="tomb-grid">
+                        <div class="future-engraving reveal">
+                            <i class="fas fa-file-medical-alt"></i>
+                            <h3>السيرة الذاتية (CV)</h3>
+                            <p style="color: var(--papyrus); font-size: 0.95rem;">سيتم نحت السيرة الذاتية المفصلة والجاهزة للتحميل هنا قريباً.</p>
+                        </div>
+                        <div class="future-engraving reveal">
+                            <i class="fas fa-award"></i>
+                            <h3>الشهادات والاعتمادات</h3>
+                            <p style="color: var(--papyrus); font-size: 0.95rem;">مساحة مخصصة لإضافة الشهادات الجامعية، والدورات الطبية، والمؤتمرات.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- قسم السجل المهني المستقبلي -->
+                <section id="future" class="section">
+                    <div class="title-container reveal">
+                        <h2 class="section-title">المسار المهني السريري</h2>
+                    </div>
+                    <div class="tomb-grid">
+                        <div class="future-engraving reveal">
+                            <i class="fas fa-stethoscope"></i>
+                            <h3>التدريب وسنة الامتياز</h3>
+                            <p style="color: var(--papyrus); font-size: 0.95rem;">سيتم تدوين سجل التناوب السريري (Clinical Rotations) والخبرات العملية.</p>
+                        </div>
+                        <div class="future-engraving reveal">
+                            <i class="fas fa-clinic-medical"></i>
+                            <h3>العيادة الخاصة</h3>
+                            <p style="color: var(--papyrus); font-size: 0.95rem;">مساحة مستقبلية لعرض تفاصيل العيادة، التخصص الدقيق، وحجز المواعيد.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- قسم التواصل -->
+                <section id="contact" class="section" style="min-height: 40vh;">
+                    <div class="title-container reveal">
+                        <h2 class="section-title">قنوات المراسلة</h2>
+                    </div>
+                    <div class="contact-container reveal">
+                        <a href="https://wa.me/+201280903166" target="_blank" class="gold-btn">
+                            <i class="fab fa-whatsapp"></i> واتساب
+                        </a>
+                        <a href="mailto:y.elnahase@gmail.com" class="gold-btn">
+                            <i class="fas fa-envelope"></i> البريد الإلكتروني
+                        </a>
+                        <a href="https://www.facebook.com/yousefelnahase" target="_blank" class="gold-btn">
+                            <i class="fab fa-facebook-f"></i> فيسبوك
+                        </a>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <!-- البرمجة التفاعلية (JS) -->
+    <script>
+        // 1. تأثير الظهور التدريجي (Scroll Reveal)
+        function reveal() {
+            const reveals = document.querySelectorAll('.reveal');
+            reveals.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                if (elementTop < window.innerHeight - 100) {
+                    element.classList.add('active');
+                }
+            });
+        }
+        window.addEventListener('scroll', reveal);
+        setTimeout(reveal, 200);
+
+        // 2. تتبع الروابط (ScrollSpy)
+        const sections = document.querySelectorAll('section');
+        const navItems = document.querySelectorAll('nav a');
+        
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (scrollY >= sectionTop - 150) {
+                    current = section.getAttribute('id');
+                }
+            });
+            navItems.forEach(a => {
+                a.classList.remove('active');
+                if (a.getAttribute('href') === `#${current}`) {
+                    a.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
